@@ -1,5 +1,5 @@
 [rewrite_local]
-# 清除广告图片请求
+# 清除广告图片请
 ^https?:\/\/cdn\.smartimg\.chelaile\.net\.cn\/5d26554ecb7446e8bb0945d7d2d78e6e\.jpg url reject
 
 # 修改广告配置JSON响应
