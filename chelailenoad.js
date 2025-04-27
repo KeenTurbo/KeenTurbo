@@ -9,9 +9,37 @@
 let body = $response.body;
 
 // 关键修改点：
-body = body.replace(/"ads":\[.*?\]/gs, '"ads":[]');  // 清空广告数组
-body = body.replace(/"homeAdPosition":5/, '"homeAdPosition":0'); // 关闭首页广告位
-body = body.replace(/"isDisplay":0/, '"isDisplay":1'); // 伪装不显示广告
-body = body.replace(/"actPosition":0/, '"actPosition":1'); // 隐藏活动提示
 
-$done({body});
+const $ = new API('ad-blocker');
+
+let body = $.response.body;
+try {
+    let json = JSON.parse(body);
+    
+    // 执行深度修改
+    json = (function modifyDeep(config) {
+        return {
+            ...config,
+            data: {
+                ...config.data,
+                ads: [], // 清空所有广告数据
+                config: {
+                    ...config.data.config,
+                    homeAdPosition: -1,
+                    isDisplay: 1,
+                    adStyle: 0,
+                    rejectHomeAdShow: 1,
+                    height: 0,
+                    width: 0,
+                    refreshTime: 0,
+                    mixRefreshAdInterval: 0
+                }
+            }
+        };
+    })(json);
+
+    $.done({ body: JSON.stringify(json) });
+} catch (e) {
+    $.log(`解析失败: ${e}`);
+    $.done();
+}
