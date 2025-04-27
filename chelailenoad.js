@@ -3,7 +3,7 @@
 ^https?:\/\/cdn\.smartimg\.chelaile\.net\.cn\/5d26554ecb7446e8bb0945d7d2d78e6e\.jpg url reject
 
 # 修改广告配置JSON响应
-^https?:\/\/api\.chelaile\.net\.cn\/adpub\/ url script-response-body https://raw.githubusercontent.com/KeenTurbo/KeenTurbo/chelailenoad.js
+^https?:\/\/api\.chelaile\.net\.cn\/adpub\/ url script-response-body https://raw.githubusercontent.com/KeenTurbo/KeenTurbo/refs/heads/gh-pages/chelailenoad.js
 
 
 let body = $response.body;
